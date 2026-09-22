@@ -1,0 +1,19 @@
+{
+  "name": "@molulabs/ds",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Molulabs Design System — componentes React, tokens y fuentes (origen: Claude Design, proyecto 9dc4b57a-d1fe-4377-895b-fe499512b839)",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./styles.css": "./styles.css"
+  },
+  "files": ["src", "tokens", "assets", "styles.css"],
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

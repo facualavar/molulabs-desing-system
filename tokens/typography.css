@@ -1,0 +1,27 @@
+:root {
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif; /* @kind font */
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; /* @kind font */
+  --font-body: var(--sans);
+  --font-heading: var(--sans);
+  --font-numeric: var(--mono);
+
+  /* Type scale — small, dense, administrative */
+  --text-xs: 11.5px;   /* nav section heads, nav badges */
+  --text-sm: 12.5px;   /* column heads, card meta */
+  --text-pill: 12px;   /* status pills */
+  --text-base: 13.5px; /* table cells, buttons, body of dense UI */
+  --text-md: 14px;     /* nav items, card titles, toast titles */
+  --text-body: 15px;   /* page body default */
+  --text-lg: 16px;     /* banner headings */
+  --text-xl: 17px;     /* dialog titles */
+  --text-2xl: 19px;    /* page title */
+  --text-stat: 22px;   /* KPI figure */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.55;
+  --tracking-title: -0.015em;
+}

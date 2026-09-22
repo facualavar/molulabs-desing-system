@@ -1,0 +1,80 @@
+:root {
+  /* ── Ink (text) ───────────────────────────────── */
+  --ink: #19211C;        /* primary text, table figures */
+  --ink-2: #4C574F;      /* secondary text, labels */
+  --ink-3: #7B857D;      /* tertiary text, column heads, disabled */
+
+  /* ── Paper (surfaces) ─────────────────────────── */
+  --page: #F3F4F1;       /* app background */
+  --card: #FFFFFF;       /* card / table / sheet surface */
+  --zebra: #FAFBF9;      /* table header + alternating rows */
+  --line: #DCDFD8;       /* card and table borders */
+  --line-soft: #E8EAE5;  /* row rules inside a card */
+
+  /* ── Chrome (the green navigation field) ──────── */
+  --chrome: #223026;
+  --chrome-2: #2E3F33;   /* hover / active nav item */
+  --chrome-line: #3B4E40;
+  --chrome-ink: #C9D2CA; /* nav label */
+  --chrome-mut: #8E9C90; /* nav section head, meta */
+
+  /* ── Accent ───────────────────────────────────── */
+  --leather: #8F5A2E;    /* brand mark, link hover, focus ring, detail icons */
+  --leather-2: #C98A4B;  /* the same accent on the chrome field — base leather fails contrast on dark */
+
+  /* ── Status ───────────────────────────────────── */
+  --ok: #2E6B44;      --ok-bg: #E9F2EB;
+  --warn: #7E5507;    --warn-bg: #FBF2E0;
+  --alert: #A32A1F;   --alert-bg: #FBEDEB;
+  --mut: #4C574F;     --mut-bg: #EDEFEA;
+
+  /* ── Chart ramp ───────────────────────────────────
+     Los tres estados base tienen casi la misma luminosidad (ok L≈40, warn L≈38,
+     alert L≈35): como texto o pastilla funcionan, pero en arcos vecinos de una dona
+     se confunden. Estas variantes conservan el tono y suben el valor, igual que
+     --leather-2 hace sobre el campo chrome. Sólo para rellenos grandes (dona,
+     columnas apiladas), nunca para texto. */
+  --warn-2: #B07A12;
+  --mut-2: #8A958C;
+
+  /* Deep ink used for headings set on a status tint */
+  --ok-ink: #1E4A2E;
+  --warn-ink: #5C3E05;
+  --alert-ink: #6E1B13;
+
+  /* ── Semantic aliases ─────────────────────────── */
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-2);
+  --text-muted: var(--ink-3);
+  --surface-page: var(--page);
+  --surface-card: var(--card);
+  --surface-nav: var(--chrome);
+  --border-default: var(--line);
+  --border-soft: var(--line-soft);
+  --action-solid: var(--chrome);
+  --action-solid-hover: var(--chrome-2);
+  --action-danger: var(--alert);
+  --focus-ring: var(--leather);
+}
+
+/* ── Themes ───────────────────────────────────────
+   Sólo cambian superficies, chrome y acento. Status y rampas se heredan.
+   --leather conserva el nombre por compatibilidad: es "el acento" del tema. */
+
+/* Carbón — el pug: negro neutro + rosa de la lengua */
+[data-theme="carbon"] {
+  --ink: #1B1B1D; --ink-2: #505055; --ink-3: #808086;
+  --page: #F3F3F2; --card: #FFFFFF; --zebra: #FAFAF9; --line: #DDDDDA; --line-soft: #E9E9E7;
+  --chrome: #1E1E21; --chrome-2: #2C2C31; --chrome-line: #3A3A40; --chrome-ink: #CFCFD4; --chrome-mut: #8F8F97;
+  --leather: #B02E5F; --leather-2: #F27BA6;
+  --mut: #505055; --mut-bg: #EDEDEB; --mut-2: #8F8F97;
+}
+
+/* Señal — el borde glitch del logo: azul noche + cian */
+[data-theme="senal"] {
+  --ink: #16202A; --ink-2: #4A5663; --ink-3: #7A8591;
+  --page: #F1F4F6; --card: #FFFFFF; --zebra: #F9FBFC; --line: #D8DEE3; --line-soft: #E6EAED;
+  --chrome: #132230; --chrome-2: #1D3142; --chrome-line: #2A4053; --chrome-ink: #C5D1DB; --chrome-mut: #8A9AA8;
+  --leather: #0E7282; --leather-2: #5FD3E3;
+  --mut: #4A5663; --mut-bg: #EAEEF1; --mut-2: #8A9AA8;
+}

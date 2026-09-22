@@ -1,0 +1,28 @@
+:root {
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 6px;
+  --space-4: 8px;
+  --space-5: 10px;
+  --space-6: 14px;
+  --space-7: 16px;
+  --space-8: 18px;
+  --space-9: 22px;
+  --space-10: 26px;
+  --space-11: 28px;
+  --space-12: 48px;
+
+  /* Recurring compound spacings */
+  --pad-cell: 10px 14px;      /* table cell */
+  --pad-head: 9px 14px;       /* table column head */
+  --pad-card: 16px 18px;      /* card body */
+  --pad-button: 9px 15px;     /* default button */
+  --pad-button-sm: 8px 14px;  /* secondary / detail button */
+  --pad-nav-item: 7px 10px;
+  --pad-screen: 26px 28px 48px;
+
+  --nav-width: 258px;
+  --toast-width: 390px;
+  --grid-min-card: 250px;
+  --grid-min-wide: 300px;
+}

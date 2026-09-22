@@ -1,0 +1,102 @@
+/* ── Density modes ─────────────────────────────────────────────
+   One brand, three media. These are the ONLY tokens that change
+   per medium; colour, type family, radius and voice never fork.
+     compact      → backoffice  (13.5px, 32px rows, mouse)
+     comfortable  → landing     (18px body, 48–72px display)
+     touch        → mobile      (16px min, 44px tap target)
+   Apply on any ancestor: <body data-density="touch">
+   ------------------------------------------------------------- */
+:root {
+  --ui-text: 13.5px;
+  --ui-text-sm: 12.5px;
+  --ui-text-lg: 15px;
+  --ui-title: 19px;
+  --ui-display-min: 28px;          /* @kind font */
+  --ui-display-max: 28px;          /* @kind font */
+  --ui-display: clamp(var(--ui-display-min), 5.5vw, var(--ui-display-max));  /* @kind font */
+  --row-h: 32px;
+  --tap-min: 28px;
+  --pad-control: 9px 15px;
+  --pad-field: 8px 11px;
+  --dialog-width: 460px;
+  --dialog-pad: 24px;
+  --field-mono: 13px;           /* @kind font */
+  --pad-row: 10px 14px;
+  --pad-screen: 26px 28px 48px;
+  --gap-stack: 14px;
+  --gap-section: 22px;
+  --measure: 72ch;                 /* @kind other */
+  --container: 100%;               /* @kind other */
+}
+
+[data-density="compact"] {
+  --ui-text: 13.5px;
+  --ui-text-sm: 12.5px;
+  --ui-text-lg: 15px;
+  --ui-title: 19px;
+  --ui-display-min: 28px;          /* @kind font */
+  --ui-display-max: 28px;          /* @kind font */
+  --ui-display: clamp(var(--ui-display-min), 5.5vw, var(--ui-display-max));  /* @kind font */
+  --row-h: 32px;
+  --tap-min: 28px;
+  --pad-control: 9px 15px;
+  --pad-field: 8px 11px;
+  --dialog-width: 460px;
+  --dialog-pad: 24px;
+  --field-mono: 13px;           /* @kind font */
+  --pad-row: 10px 14px;
+  --pad-screen: 26px 28px 48px;
+  --gap-stack: 14px;
+  --gap-section: 22px;
+  --measure: 72ch;                 /* @kind other */
+  --container: 100%;               /* @kind other */
+}
+
+[data-density="comfortable"] {
+  --ui-text: 18px;
+  --ui-text-sm: 15px;
+  --ui-text-lg: 20px;
+  --ui-title: 32px;
+  --ui-display-min: 48px;          /* @kind font */
+  --ui-display-max: 72px;          /* @kind font */
+  --ui-display: clamp(var(--ui-display-min), 5.5vw, var(--ui-display-max));  /* @kind font */
+  --row-h: 44px;
+  --tap-min: 40px;
+  --pad-control: 14px 24px;
+  --pad-field: 12px 14px;
+  --dialog-width: 520px;
+  --dialog-pad: 32px;
+  --field-mono: 17px;          /* @kind font */
+  --pad-row: 16px 20px;
+  --pad-screen: 72px 32px 96px;
+  --gap-stack: 20px;
+  --gap-section: 72px;
+  --measure: 62ch;                 /* @kind other */
+  --container: 1120px;             /* @kind other */
+  --leading-normal: 1.6;
+}
+
+[data-density="touch"] {
+  --ui-text: 16px;
+  --ui-text-sm: 14px;
+  --ui-text-lg: 18px;
+  --ui-title: 22px;
+  --ui-display-min: 30px;          /* @kind font */
+  --ui-display-max: 30px;          /* @kind font */
+  --ui-display: clamp(var(--ui-display-min), 5.5vw, var(--ui-display-max));  /* @kind font */
+  --row-h: 56px;
+  --tap-min: 44px;
+  --pad-control: 14px 18px;
+  --pad-field: 11px 14px;
+  --dialog-width: 100%;
+  --dialog-pad: 16px;
+  --field-mono: 16px;          /* @kind font */
+  --pad-row: 14px 16px;
+  --pad-screen: 16px 16px 88px;
+  --gap-stack: 12px;
+  --gap-section: 20px;
+  --measure: 40ch;                 /* @kind other */
+  --container: 100%;               /* @kind other */
+}
+
+[data-density] { font-size: var(--ui-text); line-height: var(--leading-normal); }
