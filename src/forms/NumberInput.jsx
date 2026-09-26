@@ -1,7 +1,7 @@
 import React from 'react';
 import { controlStyle } from './Field.jsx';
 
-export function NumberInput({ value, onChange, unit, prefix, invalid, disabled, id, step, style }) {
+export function NumberInput({ value, onChange, unit, prefix, invalid, disabled, readOnly, name, id, step, style }) {
   const [focus, setFocus] = React.useState(false);
   return (
     <span style={{ position: 'relative', display: 'block' }}>
@@ -11,11 +11,11 @@ export function NumberInput({ value, onChange, unit, prefix, invalid, disabled, 
           fontFamily: 'var(--mono)', fontSize: '13px', color: 'var(--ink-3)', pointerEvents: 'none'
         }}>{prefix}</span>
       ) : null}
-      <input id={id} inputMode="decimal" step={step} value={value} disabled={disabled}
-        onChange={e => onChange && onChange(e.target.value)}
+      <input id={id} inputMode="decimal" step={step} value={value} disabled={disabled} readOnly={readOnly} name={name} aria-readonly={readOnly || undefined} tabIndex={readOnly ? -1 : undefined}
+        onChange={e => !readOnly && onChange && onChange(e.target.value)}
         onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}
         style={{
-          ...controlStyle({ invalid, disabled, mono: true, align: 'right', focus }),
+          ...controlStyle({ invalid, disabled, readOnly, mono: true, align: 'right', focus }),
           ...(unit ? { paddingRight: '46px' } : {}), ...(prefix ? { paddingLeft: '28px' } : {}), ...style
         }} />
       {unit ? (

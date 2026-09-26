@@ -21,10 +21,12 @@ export function Field({ label, hint, error, required, htmlFor, children, style }
 }
 
 /** Shared visual contract for every control that looks like a box. */
-export function controlStyle({ invalid, disabled, mono, align, focus } = {}) {
+export function controlStyle({ invalid, disabled, mono, align, focus, readOnly } = {}) {
+  if (readOnly) focus = false;
   return {
-    width: '100%', background: 'var(--card)', color: 'var(--ink)',
-    border: '1px solid ' + (invalid ? 'var(--alert)' : focus ? 'var(--leather)' : 'var(--line)'),
+    width: '100%', background: readOnly ? 'var(--zebra)' : 'var(--card)', color: 'var(--ink)',
+    border: '1px solid ' + (invalid ? 'var(--alert)' : focus ? 'var(--leather)' : readOnly ? 'var(--line-soft)' : 'var(--line)'),
+    cursor: readOnly ? 'default' : undefined,
     borderRadius: 'var(--r)', padding: 'var(--pad-field)', minHeight: 'var(--tap-min)',
     fontFamily: mono ? 'var(--mono)' : 'var(--sans)',
     fontSize: mono ? 'var(--field-mono)' : 'var(--ui-text)',

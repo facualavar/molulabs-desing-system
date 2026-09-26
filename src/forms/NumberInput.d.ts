@@ -13,6 +13,10 @@ export interface NumberInputProps {
   prefix?: string;
   invalid?: boolean;
   disabled?: boolean;
+  /** Calculated or inherited figure (total, superficie según catastro): shown in a flat box, not editable,
+   *  still submitted with the form. Unlike disabled it keeps full contrast. */
+  readOnly?: boolean;
+  name?: string;
   id?: string;
   step?: number | string;
   style?: React.CSSProperties;
