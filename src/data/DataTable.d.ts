@@ -27,6 +27,8 @@ export interface DataTableProps {
   footer?: React.ReactNode;
   /** Right-hand total, monospaced. */
   footerTotal?: React.ReactNode;
+  /** Shown instead of the table when rows is empty — pass an <EmptyState>. */
+  empty?: React.ReactNode;
 }
 
 export declare function DataTable(props: DataTableProps): React.JSX.Element;

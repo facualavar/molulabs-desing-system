@@ -14,8 +14,9 @@ const td = (o = {}) => ({
   whiteSpace: o.align === 'right' ? 'nowrap' : 'normal'
 });
 
-export function DataTable({ columns, rows, onRowClick, footer, footerTotal }) {
+export function DataTable({ columns, rows = [], onRowClick, footer, footerTotal, empty }) {
   const [hover, setHover] = React.useState(-1);
+  if (!rows.length && empty) return <div style={{ padding: '32px 16px', display: 'flex', justifyContent: 'center' }}>{empty}</div>;
   return (
     <div>
       <div style={{ overflowX: 'auto' }}>
