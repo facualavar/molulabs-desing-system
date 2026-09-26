@@ -4,7 +4,7 @@ import * as React from 'react';
  * The system's action. Solid green chrome is the single primary action per view;
  * everything else is the hairline secondary.
  */
-export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLElement> {
   /** Visual weight. Default "primary". */
   tone?: 'primary' | 'secondary' | 'ghost' | 'danger';
   /** "md" for page actions, "sm" inside detail sheets and toolbars. Default "md". */
