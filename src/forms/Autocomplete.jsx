@@ -1,8 +1,11 @@
 import React from 'react';
+import * as ReactDOM from 'react-dom';
 import { controlStyle } from './Field.jsx';
 
+// With a bundler ReactDOM is the imported module. Claude Design strips imports and loads ReactDOM
+// as a global, so the name may be undeclared there: check it with typeof, then try window.ReactDOM.
 const portal = (node, target) => {
-  const RD = typeof window !== 'undefined' && window.ReactDOM;
+  const RD = typeof ReactDOM !== 'undefined' && ReactDOM.createPortal ? ReactDOM : typeof window !== 'undefined' && window.ReactDOM;
   return RD && RD.createPortal && target ? RD.createPortal(node, target) : node;
 };
 export const acNorm = s => String(s == null ? '' : s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();

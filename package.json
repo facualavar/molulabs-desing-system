@@ -14,6 +14,7 @@
   },
   "files": ["src", "tokens", "assets", "styles.css"],
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "react-dom": ">=18"
   }
 }
