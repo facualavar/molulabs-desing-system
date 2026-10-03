@@ -59,6 +59,37 @@ export function MultiChoice({ value = [], onChange, options = [], name, min = 18
       </div>
     );
   }
+  if (variant === 'buttons') {
+    const main = opts.filter(o => !o.exclusive), ex = opts.filter(o => o.exclusive);
+    const btn = (o, i) => {
+      const on = sel.includes(o.value);
+      const off = disabled || (!on && full && !o.exclusive);
+      return (
+        <label key={String(o.value)} title={typeof o.hint === 'string' ? o.hint : undefined} style={{
+          position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+          minWidth: 56, minHeight: 'var(--tap-min)', boxSizing: 'border-box', padding: '0 14px', whiteSpace: 'nowrap',
+          fontSize: 'var(--ui-text-sm)', fontWeight: on ? 500 : 400,
+          color: on ? '#fff' : 'var(--ink-2)', background: on ? 'var(--chrome)' : 'transparent',
+          borderLeft: i ? '1px solid ' + (on || sel.includes((main[i - 1] || {}).value) ? 'var(--chrome)' : 'var(--line)') : 'none',
+          cursor: off ? 'not-allowed' : 'pointer', opacity: off && !disabled ? 0.5 : 1,
+          transition: 'background var(--dur-fast), color var(--dur-fast)'
+        }}>
+          <input type="checkbox" name={name} value={String(o.value)} checked={on} disabled={off}
+            onChange={() => toggle(o)}
+            style={{ position: 'absolute', opacity: 0, width: 1, height: 1, pointerEvents: 'none' }} />
+          {on ? <i className="ti ti-check" style={{ fontSize: '14px' }} /> : null}
+          {o.label}
+        </label>
+      );
+    };
+    const group = { display: 'inline-flex', border: '1px solid ' + (invalid ? 'var(--alert)' : 'var(--line)'), borderRadius: 'var(--r)', overflow: 'hidden', background: 'var(--card)', flex: 'none' };
+    return (
+      <div role="group" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center', opacity: disabled ? 0.45 : 1, ...style }}>
+        <div style={{ maxWidth: '100%', overflowX: 'auto' }}><div style={group}>{main.map(btn)}</div></div>
+        {ex.length ? <div style={group}>{ex.map((o, i) => btn(o, i))}</div> : null}
+      </div>
+    );
+  }
   if (variant === 'chips') return (
     <div role="group" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', opacity: disabled ? 0.45 : 1, ...style }}>
       {opts.map(o => {

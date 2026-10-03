@@ -18,8 +18,9 @@ export interface MultiChoiceProps {
    * 'tiles' (default): bordered tiles in a grid, supports `hint` — forms with room, answers that need a description.
    * 'chips': compact pill toggles that wrap inline — short labels, dense backoffice forms, mobile.
    * 'list': one bordered list, one row per option, exclusive option set apart at the bottom, selection count below — long labels, narrow columns, mobile.
+   * 'buttons': joined button group (like SegmentedControl, but multi); exclusive option as a separate button — 3–6 short labels, filters-like questions.
    */
-  variant?: 'tiles' | 'chips' | 'list';
+  variant?: 'tiles' | 'chips' | 'list' | 'buttons';
   /** Min tile width in px before wrapping (tiles only). Default 180. */
   min?: number;
   /** Max selectable (exclusive options excluded from the count). */

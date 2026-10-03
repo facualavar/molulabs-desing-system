@@ -1,7 +1,66 @@
 import React from 'react';
 import { NavItem } from './NavItem.jsx';
 
-export function SideNav({ brand = 'Coop. de Productores', sub = 'Jujuy', initials = 'CP', sections, current, onNavigate, user, style }) {
+export const DEFAULT_USER_ACTIONS = [
+  { key: 'perfil', label: 'Configurar mi usuario', icon: 'ti-user-cog' },
+  { key: 'password', label: 'Cambiar contraseña', icon: 'ti-key' },
+  { key: 'logout', label: 'Cerrar sesión', icon: 'ti-logout', divider: true }
+];
+
+function UserMenu({ actions, onAction }) {
+  const [open, setOpen] = React.useState(false);
+  const [hover, setHover] = React.useState(null);
+  const ref = React.useRef(null);
+  React.useEffect(() => {
+    if (!open) return;
+    const down = e => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    const key = e => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('mousedown', down);
+    document.addEventListener('keydown', key);
+    return () => { document.removeEventListener('mousedown', down); document.removeEventListener('keydown', key); };
+  }, [open]);
+  return (
+    <div ref={ref} style={{ position: 'relative', flex: 'none' }}>
+      <button type="button" aria-label="Opciones de usuario" aria-haspopup="menu" aria-expanded={open}
+        onClick={() => setOpen(o => !o)}
+        onMouseEnter={() => setHover('btn')} onMouseLeave={() => setHover(null)}
+        style={{
+          width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          border: 0, borderRadius: 'var(--r)', cursor: 'pointer', fontSize: '18px',
+          background: open || hover === 'btn' ? 'var(--chrome-2)' : 'transparent',
+          color: open || hover === 'btn' ? '#fff' : 'var(--chrome-mut)'
+        }}><i className="ti ti-dots" /></button>
+      {open ? (
+        <div role="menu" style={{
+          position: 'absolute', bottom: 'calc(100% + 6px)', right: 0, minWidth: 220, zIndex: 50,
+          background: 'var(--card)', color: 'var(--ink)', border: '1px solid var(--line)',
+          borderRadius: 'var(--r)', boxShadow: 'var(--shadow-menu)', padding: '4px'
+        }}>
+          {actions.map(a => (
+            <React.Fragment key={a.key}>
+              {a.divider ? <div style={{ borderTop: '1px solid var(--line)', margin: '4px 0' }} /> : null}
+              <button type="button" role="menuitem"
+                onMouseEnter={() => setHover(a.key)} onMouseLeave={() => setHover(null)}
+                onClick={() => { setOpen(false); a.onClick && a.onClick(); onAction && onAction(a.key); }}
+                style={{
+                  width: '100%', display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 10px',
+                  border: 0, borderRadius: 'calc(var(--r) - 2px)', cursor: 'pointer', textAlign: 'left',
+                  fontFamily: 'inherit', fontSize: '13.5px',
+                  background: hover === a.key ? 'var(--zebra)' : 'transparent',
+                  color: a.danger ? 'var(--alert)' : 'var(--ink)'
+                }}>
+                {a.icon ? <i className={'ti ' + a.icon} style={{ fontSize: '16px', color: a.danger ? 'var(--alert)' : 'var(--ink-2)' }} /> : null}
+                {a.label}
+              </button>
+            </React.Fragment>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+export function SideNav({ brand = 'Coop. de Productores', sub = 'Jujuy', initials = 'CP', sections, current, onNavigate, user, userActions = DEFAULT_USER_ACTIONS, onUserAction, style }) {
   return (
     <nav style={{
       width: 'var(--nav-width)', flex: 'none', background: 'var(--chrome)', color: 'var(--chrome-ink)',
@@ -47,6 +106,7 @@ export function SideNav({ brand = 'Coop. de Productores', sub = 'Jujuy', initial
               <div style={{ fontSize: '13.5px', color: '#fff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user.name}</div>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--chrome-mut)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user.role}</div>
             </div>
+            {userActions && userActions.length ? <UserMenu actions={userActions} onAction={onUserAction} /> : null}
           </div>
         </div>
       ) : null}

@@ -8,6 +8,10 @@ export interface KeyValueItem {
   v: React.ReactNode;
   /** Set the value in mono — CUITs, amounts, dates, codes. */
   mono?: boolean;
+  /** Totals line: hairline above, weight 600, value one step larger. Usually the last item ("Total"). */
+  emphasis?: boolean;
+  /** Alias of emphasis. */
+  total?: boolean;
 }
 
 export interface KeyValueListProps {
