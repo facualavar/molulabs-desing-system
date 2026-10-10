@@ -1,0 +1,46 @@
+{
+  "projectId": "9dc4b57a-d1fe-4377-895b-fe499512b839",
+  "shape": "package",
+  "pkg": "@molulabs/ds",
+  "globalName": "MolulabsDS",
+  "srcDir": "src",
+  "cssEntry": ".design-sync/ds.css",
+  "overrides": {
+    "Modal": {
+      "cardMode": "single",
+      "viewport": "780x440"
+    },
+    "ModalHeader": {
+      "cardMode": "single",
+      "viewport": "580x240"
+    },
+    "Dialog": {
+      "cardMode": "single",
+      "viewport": "580x320"
+    },
+    "DataTable": {
+      "cardMode": "column"
+    },
+    "AlertBanner": {
+      "cardMode": "column"
+    },
+    "KeyValueList": {
+      "cardMode": "column"
+    },
+    "Field": {
+      "cardMode": "column"
+    },
+    "Textarea": {
+      "cardMode": "column"
+    },
+    "AppBarAction": {
+      "cardMode": "column"
+    },
+    "RowActions": {
+      "cardMode": "single",
+      "primaryStory": "Open",
+      "viewport": "360x340"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}
