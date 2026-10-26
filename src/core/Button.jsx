@@ -12,11 +12,15 @@ const sizes = {
   lg: { padding: 'var(--pad-control)', fontSize: 'var(--ui-text-lg)', minHeight: 'var(--tap-min)' }
 };
 
+// Border as longhands: hover only swaps borderColor, and React warns when a longhand is removed while
+// the shorthand stays set
+const edge = color => ({ borderWidth: '1px', borderStyle: 'solid', borderColor: color });
+
 const tones = {
-  primary:   { background: 'var(--chrome)', border: '1px solid var(--chrome)', color: '#fff' },
-  secondary: { background: 'var(--card)', border: '1px solid var(--line)', color: 'var(--ink)', fontWeight: 'var(--weight-regular)' },
-  ghost:     { background: 'transparent', border: '1px solid transparent', color: 'var(--ink-2)', fontWeight: 'var(--weight-regular)' },
-  danger:    { background: 'var(--alert)', border: '1px solid var(--alert)', color: '#fff' }
+  primary:   { background: 'var(--chrome)', ...edge('var(--chrome)'), color: '#fff' },
+  secondary: { background: 'var(--card)', ...edge('var(--line)'), color: 'var(--ink)', fontWeight: 'var(--weight-regular)' },
+  ghost:     { background: 'transparent', ...edge('transparent'), color: 'var(--ink-2)', fontWeight: 'var(--weight-regular)' },
+  danger:    { background: 'var(--alert)', ...edge('var(--alert)'), color: '#fff' }
 };
 
 const hovers = {
