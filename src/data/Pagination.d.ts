@@ -10,6 +10,8 @@ export interface PaginationProps {
   /** e.g. [20, 50, 100] — shows the "Filas" selector when paired with onPageSize. */
   pageSizes?: number[];
   onPageSize?: (size: number) => void;
+  /** Blocks every page change, e.g. while the next page is loading. */
+  disabled?: boolean;
   style?: React.CSSProperties;
 }
 /**

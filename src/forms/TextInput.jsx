@@ -1,16 +1,17 @@
 import React from 'react';
 import { controlStyle } from './Field.jsx';
 
-export function TextInput({ value, onChange, placeholder, mono, align, icon, invalid, disabled, id, type = 'text', style, ...rest }) {
+export function TextInput({ value, onChange, onFocus, onBlur, placeholder, mono, align, icon, invalid, disabled, id, type = 'text', style, ...rest }) {
   const [focus, setFocus] = React.useState(false);
   const input = (
-    <input id={id} type={type} value={value} disabled={disabled} placeholder={placeholder}
-      onChange={e => onChange && onChange(e.target.value)}
-      onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}
+    <input {...rest} id={id} type={type} value={value} disabled={disabled} placeholder={placeholder}
+      onChange={e => onChange && onChange(e.target.value, e)}
+      onFocus={e => { setFocus(true); onFocus && onFocus(e); }}
+      onBlur={e => { setFocus(false); onBlur && onBlur(e); }}
       style={{
         ...controlStyle({ invalid, disabled, mono, align, focus }),
         ...(icon ? { paddingLeft: '32px' } : {}), ...style
-      }} {...rest} />
+      }} />
   );
   if (!icon) return input;
   return (

@@ -12,7 +12,7 @@ function pages(cur, count) {
   return out;
 }
 
-export function Pagination({ page = 1, pageSize = 20, total = 0, onPage, pageSizes, onPageSize, style }) {
+export function Pagination({ page = 1, pageSize = 20, total = 0, onPage, pageSizes, onPageSize, disabled, style }) {
   const count = Math.max(1, Math.ceil(total / pageSize));
   const from = total ? (page - 1) * pageSize + 1 : 0;
   const to = Math.min(total, page * pageSize);
@@ -23,26 +23,26 @@ export function Pagination({ page = 1, pageSize = 20, total = 0, onPage, pageSiz
     fontFamily: 'var(--mono)', fontSize: 'var(--ui-text-sm)', cursor: dis || on ? 'default' : 'pointer',
     opacity: dis ? .45 : 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center'
   });
-  const go = p => onPage && p >= 1 && p <= count && p !== page && onPage(p);
+  const go = p => !disabled && onPage && p >= 1 && p <= count && p !== page && onPage(p);
   return (
-    <nav aria-label="Paginación" style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', padding: '8px 14px', borderTop: 'var(--border-hair-soft)', ...style }}>
+    <nav aria-label="Paginación" aria-busy={disabled || undefined} style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', padding: '8px 14px', borderTop: 'var(--border-hair-soft)', ...style }}>
       <span style={{ marginRight: 'auto', fontSize: 'var(--ui-text-sm)', color: 'var(--ink-3)' }}>
         <span style={{ fontFamily: 'var(--mono)', color: 'var(--ink-2)' }}>{fmt(from)}–{fmt(to)}</span> de <span style={{ fontFamily: 'var(--mono)', color: 'var(--ink-2)' }}>{fmt(total)}</span>
       </span>
       {pageSizes && onPageSize ? (
         <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 'var(--ui-text-sm)', color: 'var(--ink-3)' }}>
           Filas
-          <select value={pageSize} onChange={e => onPageSize(Number(e.target.value))} style={{ fontFamily: 'var(--mono)', fontSize: 'var(--ui-text-sm)', color: 'var(--ink)', background: 'var(--card)', border: 'var(--border-hair)', borderRadius: 'var(--r)', padding: '4px 6px' }}>
+          <select value={pageSize} disabled={disabled} onChange={e => onPageSize(Number(e.target.value))} style={{ fontFamily: 'var(--mono)', fontSize: 'var(--ui-text-sm)', color: 'var(--ink)', background: 'var(--card)', border: 'var(--border-hair)', borderRadius: 'var(--r)', padding: '4px 6px' }}>
             {pageSizes.map(n => <option key={n} value={n}>{n}</option>)}
           </select>
         </label>
       ) : null}
       <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <button type="button" aria-label="Página anterior" disabled={page <= 1} onClick={() => go(page - 1)} style={btn(false, page <= 1)}><i className="ti ti-chevron-left" /></button>
+        <button type="button" aria-label="Página anterior" disabled={disabled || page <= 1} onClick={() => go(page - 1)} style={btn(false, disabled || page <= 1)}><i className="ti ti-chevron-left" /></button>
         {pages(page, count).map((p, i) => p === '…'
           ? <span key={'e' + i} style={{ ...btn(false, true), opacity: 1, cursor: 'default' }}>…</span>
-          : <button type="button" key={p} aria-current={p === page ? 'page' : undefined} onClick={() => go(p)} style={btn(p === page, false)}>{p}</button>)}
-        <button type="button" aria-label="Página siguiente" disabled={page >= count} onClick={() => go(page + 1)} style={btn(false, page >= count)}><i className="ti ti-chevron-right" /></button>
+          : <button type="button" key={p} disabled={disabled} aria-current={p === page ? 'page' : undefined} onClick={() => go(p)} style={btn(p === page, disabled && p !== page)}>{p}</button>)}
+        <button type="button" aria-label="Página siguiente" disabled={disabled || page >= count} onClick={() => go(page + 1)} style={btn(false, disabled || page >= count)}><i className="ti ti-chevron-right" /></button>
       </div>
     </nav>
   );

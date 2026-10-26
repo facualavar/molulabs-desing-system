@@ -5,6 +5,8 @@ import * as React from 'react';
  */
 export interface FieldProps {
   label?: React.ReactNode;
+  /** Keeps the label for screen readers only — filters whose placeholder already says what they filter. */
+  hideLabel?: boolean;
   /** Muted helper line — units, format, where the value comes from. */
   hint?: React.ReactNode;
   /** Replaces the hint and turns the control's border red. */

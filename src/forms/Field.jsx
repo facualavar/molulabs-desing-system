@@ -1,10 +1,16 @@
 import React from 'react';
 
-export function Field({ label, hint, error, required, htmlFor, children, style }) {
+// Visually hidden but read by screen readers
+const srOnly = {
+  position: 'absolute', width: 1, height: 1, margin: -1, padding: 0, border: 0,
+  overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap'
+};
+
+export function Field({ label, hideLabel, hint, error, required, htmlFor, children, style }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', minWidth: 0, ...style }}>
       {label ? (
-        <label htmlFor={htmlFor} style={{ fontSize: 'var(--ui-text-sm)', color: 'var(--ink-2)' }}>
+        <label htmlFor={htmlFor} style={hideLabel ? srOnly : { fontSize: 'var(--ui-text-sm)', color: 'var(--ink-2)' }}>
           {label}{required ? <span style={{ color: 'var(--alert)' }}> *</span> : null}
         </label>
       ) : null}
